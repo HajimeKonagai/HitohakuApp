@@ -2171,8 +2171,6 @@ var Log_1 = __importDefault(__webpack_require__(/*! ./pages/admin/Log */ "./reso
 
 var Report_1 = __importDefault(__webpack_require__(/*! ./pages/admin/Report */ "./resources/ts/pages/admin/Report.tsx"));
 
-var Login_1 = __importDefault(__webpack_require__(/*! ./pages/login/Login */ "./resources/ts/pages/login/Login.tsx"));
-
 var Loading_1 = __importDefault(__webpack_require__(/*! ./components/Loading */ "./resources/ts/components/Loading.tsx"));
 
 var BackButton_1 = __importDefault(__webpack_require__(/*! ./pages/public/components/BackButton */ "./resources/ts/pages/public/components/BackButton.tsx"));
@@ -2257,9 +2255,6 @@ var Router = function Router() {
     path: "report",
     element: react_1["default"].createElement(Report_1["default"], null)
   }))) || react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "login",
-    element: react_1["default"].createElement(Login_1["default"], null)
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "admin/*",
     element: react_1["default"].createElement(react_router_dom_1.Navigate, {
       to: "/login"
@@ -6680,111 +6675,6 @@ var SearchField = function SearchField(_a) {
 
 exports.SearchField = SearchField;
 exports["default"] = exports.SearchField;
-
-/***/ }),
-
-/***/ "./resources/ts/pages/login/Login.tsx":
-/*!********************************************!*\
-  !*** ./resources/ts/pages/login/Login.tsx ***!
-  \********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var AuthQuery_1 = __webpack_require__(/*! ../../queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
-
-var PageLogin = function PageLogin() {
-  var login = (0, AuthQuery_1.useLogin)();
-
-  var _a = (0, react_1.useState)(''),
-      email = _a[0],
-      setEmail = _a[1];
-
-  var _b = (0, react_1.useState)(''),
-      password = _b[0],
-      setPassword = _b[1];
-  /*
-  const[email, setEmail] = useState('');
-  const[password, setPassword] = useState('');
-  */
-
-
-  var handleLogin = function handleLogin(e) {
-    e.preventDefault();
-    login.mutate({
-      email: email,
-      password: password
-    });
-  };
-
-  return react_1["default"].createElement("article", {
-    className: "login"
-  }, react_1["default"].createElement("form", {
-    onSubmit: handleLogin
-  }, react_1["default"].createElement("dl", null, react_1["default"].createElement("dt", null, react_1["default"].createElement("label", null, "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9")), react_1["default"].createElement("dd", null, react_1["default"].createElement("input", {
-    name: "email",
-    type: "email",
-    className: "input",
-    value: email,
-    onChange: function onChange(e) {
-      return setEmail(e.target.value);
-    }
-  })), react_1["default"].createElement("dt", null), react_1["default"].createElement("label", null, "\u30D1\u30B9\u30EF\u30FC\u30C9"), react_1["default"].createElement("dd", null, react_1["default"].createElement("input", {
-    name: "password",
-    type: "password",
-    className: "input",
-    value: password,
-    onChange: function onChange(e) {
-      return setPassword(e.target.value);
-    }
-  }))), react_1["default"].createElement("button", {
-    type: "submit",
-    className: "btn"
-  }, "\u30ED\u30B0\u30A4\u30F3")));
-};
-
-exports["default"] = PageLogin;
 
 /***/ }),
 

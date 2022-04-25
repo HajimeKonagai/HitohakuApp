@@ -57,6 +57,7 @@
 								@enderror
 
 							</dd>
+							<!--
 							<dd>
 								<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -64,6 +65,7 @@
 									パスワードを記憶
 								</label>
 							</dd>
+							-->
 						</dl>
 
 

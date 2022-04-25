@@ -99,7 +99,6 @@ const Router: React.VFC = () =>
 					</>
 				) || (
 					<>
-					<Route path="login" element={<Login />} />
 					<Route path="admin/*" element={<Navigate to="/login" />} />
 					</>
 				)}
