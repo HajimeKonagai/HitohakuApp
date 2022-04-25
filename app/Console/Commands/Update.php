@@ -43,8 +43,9 @@ class Update extends Command
         // truncate reports
         \App\Models\Report::truncate();
 
-		$this->call('check:data');
 		$this->call('check:photo');
+  
+		$this->call('check:data');
 
         return Command::SUCCESS;
     }
