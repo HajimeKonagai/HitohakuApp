@@ -1,0 +1,902 @@
+@charset "UTF-8";
+/*
+display の前提は 1920 x 900 (余裕を持って)
+*/
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #20262a;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+header {
+  height: 100px;
+  width: 100%;
+  background-color: #20262a;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+header h1 {
+  margin: 0;
+  text-align: center;
+}
+header nav.admin ul li {
+  display: inline-block;
+  margin-left: 1.5rem;
+}
+header nav {
+  /* 戻るボタンと同じ幅 */
+}
+header button.button-back {
+  position: absolute;
+  top: 30px;
+  left: 1rem;
+}
+
+main {
+  z-index: 1;
+  background-color: #FBFBF0;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+footer {
+  background-color: #20262a;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+}
+footer a {
+  color: #fff;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+main .middle {
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+}
+
+a.link-button,
+span.link-button,
+button.link-button {
+  display: inline-block;
+  background-color: #465ccb;
+  color: white;
+  padding: 12px;
+  box-shadow: 0px 0px 0px 6px #0b2e89;
+  border-radius: 3px;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+  text-decoration: none;
+  margin: 1rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+a.link-button:hover,
+span.link-button:hover,
+button.link-button:hover {
+  opacity: 0.8;
+}
+a.link-button.disable,
+span.link-button.disable,
+button.link-button.disable {
+  background-color: #ccc;
+}
+a.link-button.small,
+span.link-button.small,
+button.link-button.small {
+  font-size: 1.4rem;
+  font-size: 1rem;
+}
+
+.button-back {
+  background-color: #fff;
+  color: #20262a;
+  padding: 12px;
+  border: none;
+  font-weight: bold;
+  position: relative;
+  height: 40px;
+  overflow: visible;
+  margin-left: 20px;
+  width: auto;
+  font-size: 1.2rem;
+  padding: 0;
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  text-indent: 10px;
+}
+.button-back:active {
+  opacity: 0.6;
+}
+.button-back i {
+  font-size: 1.4rem;
+  font-style: normal;
+  margin-right: 4px;
+}
+.button-back:before {
+  content: "";
+  border: solid 20px transparent;
+  border-right: 20px solid #fff;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  z-index: 1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+main article {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0 1rem;
+}
+main article div.page-header {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  text-align: center;
+}
+main article div.page-header h2 {
+  margin: 2rem 0;
+  font-size: 2.5rem;
+}
+main article div.page-body {
+  height: calc(100% - 124px);
+  position: relative;
+  margin: 0;
+}
+
+ul.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+ul.home li {
+  margin-bottom: 1rem;
+  width: 48%;
+}
+ul.home li .link-button {
+  display: block;
+}
+
+ul.random-detail {
+  margin-top: 7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+ul.random-detail li {
+  width: 30%;
+  position: relative;
+  margin-bottom: 3rem;
+}
+ul.random-detail li img {
+  position: absolute;
+  display: block;
+  width: 45%;
+  float: left;
+  left: 0;
+  top: 0;
+}
+ul.random-detail li table {
+  position: relative;
+  float: right;
+  margin-top: 1rem;
+  bottom: 0;
+  right: 0;
+  max-width: 40%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #20262a;
+  z-index: 2;
+}
+ul.random-detail li table th, ul.random-detail li table td {
+  border: 1px solid #20262a;
+  font-size: 0.8rem;
+  padding: 5px;
+  text-align: left;
+  word-break: wrap;
+}
+ul.random-detail li table th {
+  min-width: 8em;
+}
+ul.random-detail li table tfoot td {
+  text-align: right;
+}
+ul.random-detail li table tfoot td a.link-button,
+ul.random-detail li table tfoot td button.link-button {
+  font-size: 1rem;
+}
+
+div.horizontal ul.random-detail {
+  margin-top: 7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+div.horizontal ul.random-detail li {
+  width: 18%;
+}
+
+ul.initial {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+ul.initial li {
+  width: 20%;
+  height: auto;
+  text-align: center;
+}
+ul.initial li span.count {
+  display: block;
+  width: 100%;
+}
+
+div.horizontal ul.initial.jp_name,
+div.horizontal ul.initial.jp_family_name {
+  flex-direction: column;
+  height: 100%;
+  direction: rtl;
+}
+div.horizontal ul.initial.jp_name li,
+div.horizontal ul.initial.jp_family_name li {
+  width: auto;
+  height: 20%;
+}
+div.horizontal ul.initial.en_name li,
+div.horizontal ul.initial.en_family_name li {
+  width: 10%;
+}
+
+table.alternate th, table.alternate td {
+  padding: 6px 10px;
+  text-align: left;
+}
+table.alternate thead {
+  font-size: 1.2rem;
+}
+table.alternate thead th.count {
+  text-align: center;
+}
+table.alternate tbody tr {
+  background-color: #fff;
+}
+table.alternate tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+table.alternate tbody td div.td-inner {
+  min-width: 10rem;
+  height: 2.4em;
+  overflow: hidden;
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+ul.family {
+  margin: 0;
+}
+ul.family li span.count {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+div.horizontal ul.family {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: calc(100% - 110px);
+}
+div.horizontal ul.family li {
+  width: 49%;
+  height: 12.5%;
+}
+
+table.group tbody td.link {
+  min-width: 9rem;
+  text-align: left;
+}
+table.group tbody td.link a.link-button {
+  font-size: 1.2rem;
+}
+table.group tbody td.count {
+  min-width: 8rem;
+  text-align: left;
+  text-align: center;
+  font-size: 1.8rem;
+}
+/*
+ * PageList
+ */
+ul.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+ul.list li {
+  width: 25%;
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+ul.list li a {
+  display: block;
+  text-decoration: none;
+  color: #20262a;
+}
+ul.list li a img {
+  max-height: 270px;
+}
+ul.list li a span.number {
+  display: block;
+  font-weight: bold;
+}
+
+div.horizontal ul.list li {
+  width: 12.5%;
+}
+
+/*
+ * PageDetail
+ */
+div.detail {
+  position: relative;
+  height: 100%;
+}
+div.detail div.image {
+  height: calc(97% - 65px);
+  width: 97%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+div.detail div.image > img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+div.detail div.image .lens_img_box {
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 100%;
+  border: solid 5px #ffffff;
+  z-index: 3;
+  background-color: #FFF;
+}
+div.detail div.image .lens_img_box img {
+  position: absolute;
+  transform-origin: top left;
+}
+div.detail table {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: auto;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #20262a;
+  z-index: 2;
+}
+div.detail table th, div.detail table td {
+  border: 1px solid #20262a;
+  font-size: 1.4rem;
+  padding: 5px;
+  text-align: left;
+}
+div.detail table tfoot td {
+  text-align: right;
+}
+div.detail table tfoot td button.link-button {
+  font-size: 1.2rem;
+}
+
+div.horizontal div.detail img {
+  margin-left: 0;
+}
+
+/*
+ * PageSearch
+ */
+div.search {
+  margin-bottom: 1rem;
+}
+div.search input {
+  font-size: 1.6rem;
+  border-radius: 4px;
+  display: block;
+  padding: 6px 2px;
+}
+div.search button.link-button {
+  font-size: 1.2rem;
+}
+div.search button.link-button:first-child {
+  margin-left: 6px;
+}
+
+table.search thead th.link {
+  min-width: 8rem;
+}
+table.search button.link-button {
+  font-size: 1.2rem;
+}
+
+div.horizontal div.search input {
+  float: left;
+  margin-right: 1rem;
+  margin-top: 20px;
+}
+
+nav.pagination {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  height: 4rem;
+}
+nav.pagination span.pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav.pagination span.pages span.page,
+nav.pagination span.pages button.page {
+  padding: 0.3rem;
+  font-size: 1.4rem;
+  box-shadow: 0px 0px 0px 3px #0b2e89;
+  min-width: 3rem;
+  min-height: 3rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav.pagination span.pages span.page.current,
+nav.pagination span.pages button.page.current {
+  color: #0b2e89;
+  background-color: #f0f8ff;
+  font-size: 1.6rem;
+  min-width: 4rem;
+  min-height: 4rem;
+  vertical-align: middle;
+  border: none;
+  padding: 0.6rem;
+}
+nav.pagination span.pages span.first:after {
+  content: "...";
+}
+nav.pagination span.pages span.last:before {
+  content: "...";
+}
+nav.pagination span.prev,
+nav.pagination span.next {
+  position: absolute;
+  top: 23px;
+  font-size: 1rem;
+  z-index: 2;
+  display: block;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #465ccb;
+  box-shadow: 0px 0px 0px 6px #0b2e89;
+  height: 3em;
+  width: 3em;
+  text-indent: -9999px;
+  /*
+  &:before
+  {
+  	content: '';
+  	box-sizing: border-box;
+  	display: block;
+  	position: absolute;
+  	left: 1em;
+  	top: 0.5em;
+  	width: 2em;
+  	height: 0.8em;
+  	border: 1em solid transparent;
+  	border-left: 1.5em solid #fff;
+  }
+  */
+}
+nav.pagination span.prev::before,
+nav.pagination span.next::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 21px;
+  left: 15px;
+  width: 18px;
+  height: 6px;
+  background: #fff;
+}
+nav.pagination span.prev::after,
+nav.pagination span.next::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  border-top: 6px solid #fff;
+  border-right: 6px solid #fff;
+  transform: rotate(45deg);
+}
+nav.pagination span.prev {
+  left: 26px;
+}
+nav.pagination span.prev::after {
+  right: 16px;
+  transform: rotate(-135deg);
+}
+nav.pagination span.next {
+  right: 26px;
+}
+
+.loading {
+  text-align: center;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+
+.loader {
+  color: #20262a;
+  font-size: 10px;
+  margin: 80px auto;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  top: 0;
+}
+
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.loader:after {
+  left: 3.5em;
+}
+
+@-webkit-keyframes load7 {
+  0%, 80%, 100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+@keyframes load7 {
+  0%, 80%, 100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+div.login-page article,
+main article {
+  padding: 0;
+}
+div.login-page article.admin button,
+div.login-page article.login button,
+main article.admin button,
+main article.login button {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  font-size: 1em;
+}
+div.login-page article.admin table,
+div.login-page article.login table,
+main article.admin table,
+main article.login table {
+  background-color: #fff;
+}
+div.login-page article.admin table th,
+div.login-page article.login table th,
+main article.admin table th,
+main article.login table th {
+  padding: 3px;
+}
+div.login-page article.admin table td,
+div.login-page article.login table td,
+main article.admin table td,
+main article.login table td {
+  padding: 3px;
+}
+div.login-page article.admin div.page-body,
+div.login-page article.login div.page-body,
+main article.admin div.page-body,
+main article.login div.page-body {
+  height: auto;
+  overflow: auto;
+  margin: 0;
+  padding: 1rem;
+}
+div.login-page article.admin input[type=text],
+div.login-page article.admin input[type=email],
+div.login-page article.admin input[type=password],
+div.login-page article.login input[type=text],
+div.login-page article.login input[type=email],
+div.login-page article.login input[type=password],
+main article.admin input[type=text],
+main article.admin input[type=email],
+main article.admin input[type=password],
+main article.login input[type=text],
+main article.login input[type=email],
+main article.login input[type=password] {
+  border-radius: 3px;
+  border: 1px solid #999;
+  padding: 0.2rem;
+  font-size: 120%;
+}
+div.login-page article.admin label,
+div.login-page article.login label,
+main article.admin label,
+main article.login label {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+div.login-page article.admin th, div.login-page article.admin td,
+div.login-page article.login th,
+div.login-page article.login td,
+main article.admin th,
+main article.admin td,
+main article.login th,
+main article.login td {
+  border: solid 1px;
+  /* 枠線指定 */
+}
+div.login-page article.admin th span.order,
+div.login-page article.login th span.order,
+main article.admin th span.order,
+main article.login th span.order {
+  cursor: pointer;
+}
+div.login-page article.admin th span.order:hover,
+div.login-page article.login th span.order:hover,
+main article.admin th span.order:hover,
+main article.login th span.order:hover {
+  text-decoration: underline;
+}
+div.login-page article.admin .result,
+div.login-page article.login .result,
+main article.admin .result,
+main article.login .result {
+  font-size: 80%;
+}
+div.login-page article.admin .result h3,
+div.login-page article.login .result h3,
+main article.admin .result h3,
+main article.login .result h3 {
+  font-size: 1em;
+}
+div.login-page article.admin .result .message,
+div.login-page article.login .result .message,
+main article.admin .result .message,
+main article.login .result .message {
+  color: darkgreen;
+}
+div.login-page article.admin .result .warning,
+div.login-page article.login .result .warning,
+main article.admin .result .warning,
+main article.login .result .warning {
+  color: darkorange;
+}
+div.login-page article.admin .result .error,
+div.login-page article.login .result .error,
+main article.admin .result .error,
+main article.login .result .error {
+  color: crimson;
+}
+div.login-page article.admin button.link-button.delete,
+div.login-page article.login button.link-button.delete,
+main article.admin button.link-button.delete,
+main article.login button.link-button.delete {
+  background-color: #cb4646;
+  box-shadow: 0px 0px 0px 6px #890b0b;
+}
+div.login-page article.admin div.form,
+div.login-page article.login div.form,
+main article.admin div.form,
+main article.login div.form {
+  max-width: 1000px;
+  margin: 0 auto 0;
+}
+div.login-page article.admin div.form dl,
+div.login-page article.login div.form dl,
+main article.admin div.form dl,
+main article.login div.form dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+div.login-page article.admin div.form dl dt,
+div.login-page article.login div.form dl dt,
+main article.admin div.form dl dt,
+main article.login div.form dl dt {
+  font-weight: bold;
+  display: inline-block;
+  width: 10rem;
+  padding-right: 1rem;
+  border-bottom: 1px solid #999;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+div.login-page article.admin div.form dl dd,
+div.login-page article.login div.form dl dd,
+main article.admin div.form dl dd,
+main article.login div.form dl dd {
+  width: calc(100% - 10rem);
+  margin-left: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #999;
+}
+div.login-page article.admin div.form dl dd input[type=text],
+div.login-page article.admin div.form dl dd textarea,
+div.login-page article.login div.form dl dd input[type=text],
+div.login-page article.login div.form dl dd textarea,
+main article.admin div.form dl dd input[type=text],
+main article.admin div.form dl dd textarea,
+main article.login div.form dl dd input[type=text],
+main article.login div.form dl dd textarea {
+  width: calc(100% - 3rem);
+}
+div.login-page article.admin div.form dl dd span.edit,
+div.login-page article.login div.form dl dd span.edit,
+main article.admin div.form dl dd span.edit,
+main article.login div.form dl dd span.edit {
+  color: red;
+}
+div.login-page article.admin div.form dl dd span.edit:before,
+div.login-page article.login div.form dl dd span.edit:before,
+main article.admin div.form dl dd span.edit:before,
+main article.login div.form dl dd span.edit:before {
+  content: "";
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid #F00;
+  border-bottom: 2px solid #F00;
+  transform: rotate(-45deg);
+  display: inline-block;
+  vertical-align: 0.2rem;
+}
+div.login-page article.admin div.import table.data-table-import th, div.login-page article.admin div.import table.data-table-import td,
+div.login-page article.admin div.import table.data-table-raw th,
+div.login-page article.admin div.import table.data-table-raw td,
+div.login-page article.login div.import table.data-table-import th,
+div.login-page article.login div.import table.data-table-import td,
+div.login-page article.login div.import table.data-table-raw th,
+div.login-page article.login div.import table.data-table-raw td,
+main article.admin div.import table.data-table-import th,
+main article.admin div.import table.data-table-import td,
+main article.admin div.import table.data-table-raw th,
+main article.admin div.import table.data-table-raw td,
+main article.login div.import table.data-table-import th,
+main article.login div.import table.data-table-import td,
+main article.login div.import table.data-table-raw th,
+main article.login div.import table.data-table-raw td {
+  white-space: nowrap;
+}
+div.login-page article.admin div.import table.seved-settings,
+div.login-page article.login div.import table.seved-settings,
+main article.admin div.import table.seved-settings,
+main article.login div.import table.seved-settings {
+  width: auto;
+}
+div.login-page article.admin div.import table.seved-settings th, div.login-page article.admin div.import table.seved-settings td,
+div.login-page article.login div.import table.seved-settings th,
+div.login-page article.login div.import table.seved-settings td,
+main article.admin div.import table.seved-settings th,
+main article.admin div.import table.seved-settings td,
+main article.login div.import table.seved-settings th,
+main article.login div.import table.seved-settings td {
+  border: none;
+}
+
+article.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+article.login form {
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  width: 100%;
+  max-width: 500px;
+}
+article.login form label {
+  margin-bottom: 0;
+}
+article.login form input[type=email],
+article.login form input[type=password] {
+  width: 100%;
+}
+article.login form dd {
+  margin-left: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+article.login form dd span {
+  display: block;
+}
