@@ -28,7 +28,7 @@
 									id="email"
 									type="email"
 									class="form-control @error('email') is-invalid @enderror"
-									name="email" value="{{ old('email') }}"
+									name="email" value="{{ old('email', 'admin@hitohaku') }}"
 									required autocomplete="email" autofocus>
 
 								@error('email')
