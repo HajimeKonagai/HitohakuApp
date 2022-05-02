@@ -50,6 +50,47 @@ class AdminController extends Controller
 
 	}
 
+
+	public function all(Request $request)
+	{
+		$q = Plant::query();
+
+		foreach ([
+			'number',
+			'en_family_name',
+			'jp_family_name',
+			'en_name',
+			'jp_name',
+		] as $column)
+		{
+			if ($request->{$column})
+			$q->where($column, 'LIKE', '%'.$request->{$column}.'%');
+		}
+
+		return $q->get();
+
+	}
+
+	public function count(Request $request)
+	{
+		$q = Plant::query();
+
+		foreach ([
+			'number',
+			'en_family_name',
+			'jp_family_name',
+			'en_name',
+			'jp_name',
+		] as $column)
+		{
+			if ($request->{$column})
+			$q->where($column, 'LIKE', '%'.$request->{$column}.'%');
+		}
+
+		return $q->count();
+	}
+
+
 	/**
 	 * Display the specified resource.
 	 *

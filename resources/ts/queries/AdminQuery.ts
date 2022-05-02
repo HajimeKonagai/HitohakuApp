@@ -1,7 +1,7 @@
 import * as api from '../api/AdminApi'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify';
-import { SearchParam, PlantUpdate } from '../types/Admin'
+import { SearchParam, SearchParamAll, PlantUpdate } from '../types/Admin'
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,18 @@ const useIndex = (search: SearchParam) =>
 {
 	return useQuery(['admin-index', {search: search}], () => api.index(search));
 }
+
+
+const useAll = (search: SearchParamAll) =>
+{
+	return useQuery(['admin-all', {search: search}], () => api.all(search));
+}
+
+const useCount = (search: SearchParamAll) =>
+{
+	return useQuery(['admin-count', {search: search}], () => api.count(search));
+}
+
 
 
 const useLoadSetting = (key: string) =>
@@ -211,6 +223,8 @@ export {
 	useLoadSetting,
 	useSaveSetting,
 	useIndex,
+	useAll,
+	useCount,
 	useImport,
 	useUpload,
 	useStore,

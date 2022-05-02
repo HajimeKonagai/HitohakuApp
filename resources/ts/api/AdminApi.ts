@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Plant } from '../types/Plant'
-import { SearchParam, PlantUpdate, Log } from '../types/Admin'
+import { SearchParam, SearchParamAll, PlantUpdate, Log } from '../types/Admin'
 import { Pagination } from '../types/Pagination';
 
 
@@ -12,16 +12,23 @@ const index = async (search: SearchParam) =>
 	return data;
 }
 
-/*
-const getAll = async (search: SearchParam) =>
+const  all = async (search: SearchParamAll) =>
 {
-	const { data } = await axious.get<Plant>(``, {
+	const { data } = await axios.get(`/api/admin/all`, {
+		params: search
 	});
 
 	return data;
 }
-*/
 
+const  count = async (search: SearchParamAll) =>
+{
+	const { data } = await axios.get(`/api/admin/count`, {
+		params: search
+	});
+
+	return data;
+}
 
 const loadSetting = async(key: string) =>
 {
@@ -148,6 +155,8 @@ const report = async (search: SearchParam) =>
 
 export {
 	index,
+	all,
+	count,
 	saveSetting,
 	loadSetting,
 	importApi,

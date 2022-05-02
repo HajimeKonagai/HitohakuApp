@@ -27,7 +27,8 @@ import AdminCreate from './pages/admin/Create';
 import AdminEdit   from './pages/admin/Edit';
 import AdminLog    from './pages/admin/Log';
 import AdminReport from './pages/admin/Report';
-import Login       from './pages/login/Login';
+import AdminExport from './pages/admin/Export';
+
 
 import Loading from './components/Loading';
 import BackButton from './pages/public/components/BackButton';
@@ -59,6 +60,7 @@ const Router: React.VFC = () =>
 							<li><Link to="/admin">管理トップ</Link></li>
 							<li><Link to="/admin/create">新規データ追加</Link></li>
 							<li><Link to="/admin/import">CSVインポート</Link></li>
+							<li><Link to="/admin/export">CSVエクスポート</Link></li>
 							<li><Link to="/admin/upload">写真アップロード</Link></li>
 							<li><Link to="/admin/report">データチェックレポート</Link></li>
 
@@ -95,6 +97,7 @@ const Router: React.VFC = () =>
 						<Route path="edit/:number" element={<AdminEdit />} />
 						<Route path="log" element={<AdminLog />} />
 						<Route path="report" element={<AdminReport />} />
+						<Route path="export" element={<AdminExport />} />
 					</Route>
 					</>
 				) || (

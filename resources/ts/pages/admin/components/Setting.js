@@ -139,7 +139,7 @@ class Setting
 			'collect_number': '採集者標本番号',
 			'rdb_country': '国RDB',
 			'rdb_pref': '都道府県RDB',
-			'is_private': '非公開(非公開->0 or 公開->1)',
+			'is_private': '非公開(非公開->1 or 公開->0)',
 		};
 
 		let _dbFields = [];

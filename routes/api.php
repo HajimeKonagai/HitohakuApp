@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth:sanctum'], function()
 {
 	// admin index
 	Route::get( 'admin/index',  [\App\Http\Controllers\AdminController::class, 'index']);
+	Route::get( 'admin/all',  [\App\Http\Controllers\AdminController::class, 'all']);
+	Route::get( 'admin/count',  [\App\Http\Controllers\AdminController::class, 'count']);
 	Route::post('admin/import', [\App\Http\Controllers\AdminController::class, 'import']);
 	Route::post('admin/upload', [\App\Http\Controllers\AdminController::class, 'upload']);
 	Route::post('admin/store', [\App\Http\Controllers\AdminController::class, 'store']);

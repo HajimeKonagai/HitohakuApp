@@ -47,10 +47,18 @@ type Log = {
 	updated_at : string;
 }
 
+type SearchParamAll = {
+	number?: string;
+	jp_name?: string;
+	jp_family_name?: string;
+	en_name?: string;
+	en_family_name?: string;
+};
 
 
 export {
 	SearchParam,
+	SearchParamAll,
 	PlantUpdate,
 	Log,
 };
