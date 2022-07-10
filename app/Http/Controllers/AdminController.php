@@ -414,7 +414,7 @@ class AdminController extends Controller
 			{
 				if (!$create)
 				{
-					$results[$index]['warning'][] = '新規作成が許可されていません。';
+					$results[$index]['error'][] = '新規作成が許可されていません。';
 					continue;
 				}
 
@@ -637,6 +637,7 @@ class AdminController extends Controller
 		$overwrite = $request->overwrite;
 		$reportNotExistDb = $request->reportNotExistDb;
 
+		Log::debug('$overwrite');
 		Log::debug($overwrite);
 
 		/*
@@ -674,10 +675,12 @@ class AdminController extends Controller
 
 		$results = static::saveImage($request->name, $request->file('file'), $live, $overwrite, $full_only_overwrite = $rotateHorizontal, $db_check = $reportNotExistDb);
 
+		/*
 		Log::debug([
 			'index' => $request->index,
 			'results' => $results,
 		]);
+		*/
 
 
 		if ($live)

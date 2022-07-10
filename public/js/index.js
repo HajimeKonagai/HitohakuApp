@@ -2063,6 +2063,40 @@ module.exports = {
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -2073,7 +2107,11 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_error_boundary_1 = __webpack_require__(/*! react-error-boundary */ "./node_modules/react-error-boundary/dist/react-error-boundary.umd.js");
+
+var ErrorFallback_1 = __importDefault(__webpack_require__(/*! ./components/ErrorFallback */ "./resources/ts/components/ErrorFallback.tsx"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 
@@ -2105,13 +2143,37 @@ var App = function App() {
       height = _a.height;
 
   var windowClassName = width < height ? 'vertical' : 'horizontal';
+
+  var _b = (0, react_1.useState)([]),
+      errors = _b[0],
+      setErrors = _b[1];
+
+  var onError = function onError(error, info) {
+    setErrors([error.message, info.componentStack]);
+  };
+
   return react_1["default"].createElement("div", {
     className: "container " + windowClassName
+  }, errors.length > 0 && react_1["default"].createElement("div", {
+    style: {
+      border: '4px double #F00',
+      margin: '4rem',
+      padding: '1rem'
+    }
+  }, react_1["default"].createElement("h1", null, "\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3001\u4E88\u671F\u305B\u306C\u30A8\u30E9\u30FC\u304C\u767A\u751F\u3057\u307E\u3057\u305F\u3002"), react_1["default"].createElement("p", {
+    style: {
+      fontSize: '1.2rem'
+    }
+  }, react_1["default"].createElement("strong", null, "\u3082\u3057\u3088\u308D\u3057\u3051\u308C\u3070\u3001\u3053\u306E\u753B\u9762\u306E\u307E\u307E\u3002\u4FC2\u54E1\u306B\u5831\u544A\u3057\u3066\u304F\u3060\u3055\u3044\u3002", react_1["default"].createElement("br", null), "\u64CD\u4F5C\u3092\u7D9A\u3051\u3089\u308C\u308B\u5834\u5408\u306F\u3001\u4E0B\u8A18\u306E\u300C\u30C8\u30C3\u30D7\u306B\u623B\u308B\u300D\u304B\u3089\u518D\u5EA6\u64CD\u4F5C\u3057\u306A\u304A\u3057\u3066\u304F\u3060\u3055\u3044\u3002")), errors.map(function (error) {
+    return react_1["default"].createElement("p", null, error);
+  })), react_1["default"].createElement(react_error_boundary_1.ErrorBoundary, {
+    FallbackComponent: ErrorFallback_1["default"],
+    onError: onError
   }, react_1["default"].createElement(react_query_1.QueryClientProvider, {
     client: queryClient
   }, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(Router_1["default"], null)), react_1["default"].createElement(react_toastify_1.ToastContainer, {
     hideProgressBar: true
-  })));
+  }))));
 };
 
 exports["default"] = App;
@@ -2191,7 +2253,12 @@ var Router = function Router() {
     document.getElementById('logout-form').submit();
   };
 
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("header", null, react_1["default"].createElement(BackButton_1["default"], null), react_1["default"].createElement("h1", null, "\u3072\u3068\u306F\u304F\u30C7\u30FC\u30BF\u30D9\u30FC\u30B9"), authUser && react_1["default"].createElement("nav", {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("header", null, react_1["default"].createElement(BackButton_1["default"], null), react_1["default"].createElement("h1", null, "\u3072\u3068\u306F\u304F\u30C7\u30FC\u30BF\u30D9\u30FC\u30B9", react_1["default"].createElement("small", {
+    style: {
+      fontSize: '0.7rem',
+      marginLeft: '1rem'
+    }
+  }, "v 1.0.1")), authUser && react_1["default"].createElement("nav", {
     className: "admin"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin"
@@ -2203,7 +2270,7 @@ var Router = function Router() {
     to: "/admin/export"
   }, "CSV\u30A8\u30AF\u30B9\u30DD\u30FC\u30C8")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin/upload"
-  }, "\u5199\u771F\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
+  }, "\u753B\u50CF\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9")), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin/report"
   }, "\u30C7\u30FC\u30BF\u30C1\u30A7\u30C3\u30AF\u30EC\u30DD\u30FC\u30C8")), react_1["default"].createElement("li", null, react_1["default"].createElement("a", {
     href: "#",
@@ -3390,6 +3457,46 @@ exports.useWindowDimensions = useWindowDimensions;
 
 /***/ }),
 
+/***/ "./resources/ts/components/ErrorFallback.tsx":
+/*!***************************************************!*\
+  !*** ./resources/ts/components/ErrorFallback.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var ErrorFallback = function ErrorFallback() {
+  return react_1["default"].createElement("div", {
+    style: {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, react_1["default"].createElement("a", {
+    className: "link-button",
+    href: "/"
+  }, "\u30C8\u30C3\u30D7\u306B\u623B\u308B"));
+};
+
+exports["default"] = ErrorFallback;
+
+/***/ }),
+
 /***/ "./resources/ts/components/Loading.tsx":
 /*!*********************************************!*\
   !*** ./resources/ts/components/Loading.tsx ***!
@@ -3735,7 +3842,7 @@ var AdminCreate = function AdminCreate() {
     }), editData[key] && react_1["default"].createElement("span", {
       className: "edit"
     }, "edit")));
-  }), react_1["default"].createElement("dt", null, "\u5199\u771F"), react_1["default"].createElement("dd", null, react_1["default"].createElement(ImageReader_1["default"], {
+  }), react_1["default"].createElement("dt", null, "\u753B\u50CF"), react_1["default"].createElement("dd", null, react_1["default"].createElement(ImageReader_1["default"], {
     multiple: false,
     imageRead: imageRead
   }), react_1["default"].createElement("img", {
@@ -3992,7 +4099,7 @@ var AdminEdit = function AdminEdit() {
     }), editData[key] && react_1["default"].createElement("span", {
       className: "edit"
     }, "edit")));
-  }), react_1["default"].createElement("dt", null, "\u73FE\u5728\u306E\u5199\u771F"), react_1["default"].createElement("dd", null, react_1["default"].createElement("img", {
+  }), react_1["default"].createElement("dt", null, "\u73FE\u5728\u306E\u753B\u50CF"), react_1["default"].createElement("dd", null, react_1["default"].createElement("img", {
     src: "/photo/full/" + data['number'] + "/?" + new Date().getTime(),
     style: {
       maxHeight: '100px',
@@ -4002,7 +4109,7 @@ var AdminEdit = function AdminEdit() {
     style: {
       color: 'red'
     }
-  }, "\u73FE\u5728\u306E\u30D5\u30A1\u30A4\u30EB\u3092\u4E0A\u66F8\u304D\u3057\u307E\u3059\u3002(\u3053\u306E\u64CD\u4F5C\u306F\u53D6\u308A\u6D88\u305B\u307E\u305B\u3093)") || editData.number && react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("em", null, "\u3010\u30D5\u30A1\u30A4\u30EB\u540D\u5909\u66F4\u3011"), data.file_name, " \u2192 ", editData.number + '.' + data.file_name.split('.').pop()) || react_1["default"].createElement(react_1["default"].Fragment, null, data.file_name)), react_1["default"].createElement("dt", null, "\u5199\u771F\u306E\u5165\u308C\u66FF\u3048"), react_1["default"].createElement("dd", null, !file && react_1["default"].createElement(ImageReader_1["default"], {
+  }, "\u73FE\u5728\u306E\u30D5\u30A1\u30A4\u30EB\u3092\u4E0A\u66F8\u304D\u3057\u307E\u3059\u3002(\u3053\u306E\u64CD\u4F5C\u306F\u53D6\u308A\u6D88\u305B\u307E\u305B\u3093)") || editData.number && react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("em", null, "\u3010\u30D5\u30A1\u30A4\u30EB\u540D\u5909\u66F4\u3011"), data.file_name, " \u2192 ", editData.number + '.' + data.file_name.split('.').pop()) || react_1["default"].createElement(react_1["default"].Fragment, null, data.file_name)), react_1["default"].createElement("dt", null, "\u753B\u50CF\u306E\u5165\u308C\u66FF\u3048"), react_1["default"].createElement("dd", null, !file && react_1["default"].createElement(ImageReader_1["default"], {
     multiple: false,
     imageRead: imageRead
   }), file && react_1["default"].createElement("button", {
@@ -4873,9 +4980,13 @@ var AdminImport = function AdminImport() {
       return;
   });
 
-  var _a = (0, react_1.useState)(''),
-      settingName = _a[0],
-      setSettingName = _a[1];
+  var _a = (0, react_1.useState)(false),
+      showSetting = _a[0],
+      setShowSetting = _a[1];
+
+  var _b = (0, react_1.useState)(''),
+      settingName = _b[0],
+      setSettingName = _b[1];
 
   var addSetting = function addSetting() {
     if (!settingName) {
@@ -4927,7 +5038,7 @@ var AdminImport = function AdminImport() {
     setIgnoreFooter(setting.ignoreFooter);
   };
 
-  var _b = (0, react_1.useState)({
+  var _c = (0, react_1.useState)({
     // 空の値で上書きするか
     'emptyValue': false,
     // 2つ以上の件区結果があったとき、全てにインポートするか
@@ -4938,8 +5049,8 @@ var AdminImport = function AdminImport() {
     'update': false,
     'reportNotExistMedia': false
   }),
-      importSetting = _b[0],
-      setImportSetting = _b[1];
+      importSetting = _c[0],
+      setImportSetting = _c[1];
 
   var changeImportSetting = function changeImportSetting(key) {
     var newSetting = __assign({}, importSetting);
@@ -4948,21 +5059,21 @@ var AdminImport = function AdminImport() {
     setImportSetting(newSetting);
   };
 
-  var _c = (0, react_1.useState)('SJIS'),
-      encoding = _c[0],
-      setEncoding = _c[1]; // const postTypeFields = Setting.createPostTypeFields(config, models);
+  var _d = (0, react_1.useState)('SJIS'),
+      encoding = _d[0],
+      setEncoding = _d[1]; // const postTypeFields = Setting.createPostTypeFields(config, models);
 
 
   var dbFields = Setting_1["default"].createDbFields(); // SearchFields
 
-  var _d = (0, react_1.useState)(__assign({}, SearchField_1.SearchFieldDefault)),
-      searchField = _d[0],
-      setSearchField = _d[1]; // ImpportFields
+  var _e = (0, react_1.useState)(__assign({}, SearchField_1.SearchFieldDefault)),
+      searchField = _e[0],
+      setSearchField = _e[1]; // ImpportFields
 
 
-  var _e = (0, react_1.useState)([]),
-      importFields = _e[0],
-      setImportFields = _e[1];
+  var _f = (0, react_1.useState)([]),
+      importFields = _f[0],
+      setImportFields = _f[1];
   /*
    // SettingPostTypes
   const [ postTypes, setPostTypes ] = useState([]);
@@ -4970,17 +5081,17 @@ var AdminImport = function AdminImport() {
   */
 
 
-  var _f = (0, react_1.useState)(false),
-      showRawData = _f[0],
-      setShowRawData = _f[1];
-
-  var _g = (0, react_1.useState)([]),
-      fromFields = _g[0],
-      setFromFields = _g[1];
+  var _g = (0, react_1.useState)(false),
+      showRawData = _g[0],
+      setShowRawData = _g[1];
 
   var _h = (0, react_1.useState)([]),
-      rawData = _h[0],
-      setRawData = _h[1];
+      fromFields = _h[0],
+      setFromFields = _h[1];
+
+  var _j = (0, react_1.useState)([]),
+      rawData = _j[0],
+      setRawData = _j[1];
 
   var csvRead = function csvRead(csvArr) {
     console.log('csvArr', csvArr[0], Object.keys(csvArr[0])); // TODO 書く設定の from フィールドを変える
@@ -4992,29 +5103,29 @@ var AdminImport = function AdminImport() {
   }; // import
 
 
-  var _j = (0, react_1.useState)(false),
-      live = _j[0],
-      setLive = _j[1];
-
   var _k = (0, react_1.useState)(false),
-      importRunning = _k[0],
-      setImportRunning = _k[1];
+      live = _k[0],
+      setLive = _k[1];
 
-  var _l = (0, react_1.useState)({}),
-      importData = _l[0],
-      setImportData = _l[1];
+  var _l = (0, react_1.useState)(false),
+      importRunning = _l[0],
+      setImportRunning = _l[1];
 
   var _m = (0, react_1.useState)({}),
-      importResult = _m[0],
-      setImportResult = _m[1];
+      importData = _m[0],
+      setImportData = _m[1];
 
-  var _o = (0, react_1.useState)(0),
-      ignoreHeader = _o[0],
-      setIgnoreHeader = _o[1];
+  var _o = (0, react_1.useState)({}),
+      importResult = _o[0],
+      setImportResult = _o[1];
 
   var _p = (0, react_1.useState)(0),
-      ignoreFooter = _p[0],
-      setIgnoreFooter = _p[1];
+      ignoreHeader = _p[0],
+      setIgnoreHeader = _p[1];
+
+  var _q = (0, react_1.useState)(0),
+      ignoreFooter = _q[0],
+      setIgnoreFooter = _q[1];
 
   (0, react_1.useEffect)(function () {
     if (live) setImportRunning(true);
@@ -5135,7 +5246,13 @@ var AdminImport = function AdminImport() {
     title: title
   }, react_1["default"].createElement("div", {
     className: 'import'
-  }, react_1["default"].createElement("h2", null, "\u8A2D\u5B9A"), react_1["default"].createElement("table", {
+  }, react_1["default"].createElement("h2", null, "\u8A2D\u5B9A"), react_1["default"].createElement("p", null, react_1["default"].createElement("label", null, react_1["default"].createElement("input", {
+    type: "checkbox",
+    checked: showSetting,
+    onChange: function onChange(e) {
+      return setShowSetting(!showSetting);
+    }
+  }), "\u8A2D\u5B9A\u9805\u76EE\u306E\u8868\u793A")), react_1["default"].createElement("table", {
     className: "widefat fixed striped"
   }, react_1["default"].createElement("tbody", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "\u4FDD\u5B58\u3057\u305F\u8A2D\u5B9A"), react_1["default"].createElement("td", null, settings.isLoading && react_1["default"].createElement(Loading_1["default"], null) || react_1["default"].createElement("table", {
     className: "seved-settings"
@@ -5153,7 +5270,7 @@ var AdminImport = function AdminImport() {
     colSpan: 3
   }, react_1["default"].createElement("button", {
     onClick: restoreDefault
-  }, "\u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u8A2D\u5B9A\u3092\u5FA9\u5E30"))))))), react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "Encoding"), react_1["default"].createElement("td", null, react_1["default"].createElement("select", {
+  }, "\u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u8A2D\u5B9A\u3092\u5FA9\u5E30"))))))), showSetting && react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "Encoding"), react_1["default"].createElement("td", null, react_1["default"].createElement("select", {
     onChange: function onChange(e) {
       return setEncoding(e.target.value);
     },
@@ -5206,7 +5323,7 @@ var AdminImport = function AdminImport() {
     onChange: function onChange() {
       return changeImportSetting('reportNotExistMedia');
     }
-  }), "\u5199\u771F\u306E\u30D5\u30A1\u30A4\u30EB\u304C\u306A\u3044\u5834\u5408\u306B\u30EC\u30DD\u30FC\u30C8\u3059\u308B\u3002"))), react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "\u8A2D\u5B9A\u306B\u540D\u524D\u3092\u3064\u3051\u3066\u4FDD\u5B58"), react_1["default"].createElement("td", null, react_1["default"].createElement("input", {
+  }), "\u753B\u50CF\u306E\u30D5\u30A1\u30A4\u30EB\u304C\u306A\u3044\u5834\u5408\u306B\u30EC\u30DD\u30FC\u30C8\u3059\u308B\u3002"))), react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "\u8A2D\u5B9A\u306B\u540D\u524D\u3092\u3064\u3051\u3066\u4FDD\u5B58"), react_1["default"].createElement("td", null, react_1["default"].createElement("input", {
     value: settingName,
     onChange: function onChange(e) {
       return setSettingName(e.target.value);
@@ -5214,7 +5331,7 @@ var AdminImport = function AdminImport() {
     placeholder: ""
   }), react_1["default"].createElement("button", {
     onClick: addSetting
-  }, "\u73FE\u5728\u306E\u8A2D\u5B9A\u3092\u4FDD\u5B58"))))), react_1["default"].createElement(SearchField_1.SearchField, {
+  }, "\u73FE\u5728\u306E\u8A2D\u5B9A\u3092\u4FDD\u5B58")))))), showSetting && react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(SearchField_1.SearchField, {
     field: searchField,
     setField: setSearchField,
     postTypeFields: dbFields,
@@ -5224,7 +5341,7 @@ var AdminImport = function AdminImport() {
     setFields: setImportFields,
     postTypeFields: dbFields,
     fromFields: fromFields
-  }), react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "CSV\u30D5\u30A1\u30A4\u30EB"), react_1["default"].createElement("table", {
+  })), react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "CSV\u30D5\u30A1\u30A4\u30EB"), react_1["default"].createElement("table", {
     className: "widefat fixed striped"
   }, react_1["default"].createElement("tbody", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "\u30D5\u30A1\u30A4\u30EB\u8AAD\u307F\u8FBC\u307F"), react_1["default"].createElement("td", null, importRunning && rawData.length > 0 && react_1["default"].createElement("span", null, "\u30A4\u30F3\u30DD\u30FC\u30C8\u4E2D\u306B\u30D5\u30A1\u30A4\u30EB\u306E\u5909\u66F4\u306F\u3067\u304D\u307E\u305B\u3093") || react_1["default"].createElement(CsvReader_1["default"], {
     callback: csvRead
@@ -5452,7 +5569,7 @@ var AdminIndex = function AdminIndex() {
   }, [number, jpName, jpFamilyName, enName, enFamilyName]);
 
   var plantDelete = function plantDelete(number) {
-    if (window.confirm('「' + number + "」を削除してもよろしいでしょうか？\nこの操作は取り消せません。\n写真がある場合は写真も削除されます。")) {
+    if (window.confirm('「' + number + "」を削除してもよろしいでしょうか？\nこの操作は取り消せません。\n画像ファイルがある場合はがファイルも削除されます。")) {
       destroy.mutate({
         number: number
       });
@@ -6115,7 +6232,7 @@ var AdminUpload = function AdminUpload() {
       settingName = _b[0],
       setSettingName = _b[1];
 
-  var _c = (0, react_1.useState)(false),
+  var _c = (0, react_1.useState)(true),
       rotateHorizontal = _c[0],
       setRotateHorizontal = _c[1];
 
@@ -6270,7 +6387,7 @@ var AdminUpload = function AdminUpload() {
     });
     if (live) params.append('live', '1');
     if (rotateHorizontal) params.append('rotateHorizontal', '1');
-    if (live && overwrite) params.append('overwrite', '1');
+    if (overwrite) params.append('overwrite', '1');
     if (reportNotExistDb) params.append('reportNotExistDb', '1');
     uploadQuery.mutate(params);
     return;
@@ -6283,7 +6400,7 @@ var AdminUpload = function AdminUpload() {
     setImportResult([]);
   };
 
-  var title = '写真アップロード';
+  var title = '画像アップロード';
   return react_1["default"].createElement(Layout_1["default"], {
     title: title
   }, react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("h2", null, "\u8A2D\u5B9A"), react_1["default"].createElement("table", {
@@ -6326,11 +6443,11 @@ var AdminUpload = function AdminUpload() {
     placeholder: ""
   }), react_1["default"].createElement("button", {
     onClick: addSetting
-  }, "\u73FE\u5728\u306E\u8A2D\u5B9A\u3092\u4FDD\u5B58"))))), react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "\u753B\u50CF\u30D5\u30A1\u30A4\u30EB"), react_1["default"].createElement("table", {
+  }, "\u73FE\u5728\u306E\u8A2D\u5B9A\u3092\u4FDD\u5B58"))))), react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "\u753B\u50CF\u30D5\u30A1\u30A4\u30EB"), react_1["default"].createElement("p", null, "\u30D5\u30A1\u30A4\u30EB\u540D\u306F\u3001\u8CC7\u6599\u756A\u53F7\u306B\u4E00\u81F4\u3055\u305B\u3066\u304F\u3060\u3055\u3044\u3002", react_1["default"].createElement("br", null), "\u3082\u3057\u304F\u306F\u3001\u300C\u30D5\u30A1\u30A4\u30EB\u540D\u300D\u306E\u5165\u529B\u6B04\u3067\u8CC7\u6599\u756A\u53F7\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), react_1["default"].createElement("table", {
     className: "widefat fixed striped"
-  }, react_1["default"].createElement("tbody", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "\u30D5\u30A1\u30A4\u30EB\u8AAD\u307F\u8FBC\u307F"), react_1["default"].createElement("td", null, files.length < 1 && react_1["default"].createElement(ImageReader_1["default"], {
+  }, react_1["default"].createElement("tbody", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null, "\u30D5\u30A1\u30A4\u30EB\u8AAD\u307F\u8FBC\u307F"), react_1["default"].createElement("td", null, react_1["default"].createElement(ImageReader_1["default"], {
     imageRead: imageRead
-  }) || !live && react_1["default"].createElement("button", {
+  }), files.length > 1 && !live && react_1["default"].createElement("button", {
     onClick: clearAll
   }, "\u30D5\u30A1\u30A4\u30EB\u3092\u30AF\u30EA\u30A2")))))), react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, "\u30A4\u30F3\u30DD\u30FC\u30C8"), !importRunning && react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("button", {
     onClick: function onClick() {
@@ -59683,6 +59800,202 @@ function checkDCE() {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/react-error-boundary/dist/react-error-boundary.umd.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/react-error-boundary/dist/react-error-boundary.umd.js ***!
+  \****************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+(function (global, factory) {
+   true ? factory(exports, __webpack_require__(/*! react */ "./node_modules/react/index.js")) :
+  0;
+})(this, (function (exports, React) { 'use strict';
+
+  function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+      Object.keys(e).forEach(function (k) {
+        if (k !== 'default') {
+          var d = Object.getOwnPropertyDescriptor(e, k);
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: function () { return e[k]; }
+          });
+        }
+      });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+  }
+
+  var React__namespace = /*#__PURE__*/_interopNamespace(React);
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  function _inheritsLoose(subClass, superClass) {
+    subClass.prototype = Object.create(superClass.prototype);
+    subClass.prototype.constructor = subClass;
+    _setPrototypeOf(subClass, superClass);
+  }
+
+  var changedArray = function changedArray(a, b) {
+    if (a === void 0) {
+      a = [];
+    }
+
+    if (b === void 0) {
+      b = [];
+    }
+
+    return a.length !== b.length || a.some(function (item, index) {
+      return !Object.is(item, b[index]);
+    });
+  };
+
+  var initialState = {
+    error: null
+  };
+
+  var ErrorBoundary = /*#__PURE__*/function (_React$Component) {
+    _inheritsLoose(ErrorBoundary, _React$Component);
+
+    function ErrorBoundary() {
+      var _this;
+
+      for (var _len = arguments.length, _args = new Array(_len), _key = 0; _key < _len; _key++) {
+        _args[_key] = arguments[_key];
+      }
+
+      _this = _React$Component.call.apply(_React$Component, [this].concat(_args)) || this;
+      _this.state = initialState;
+
+      _this.resetErrorBoundary = function () {
+        var _this$props;
+
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+
+        _this.props.onReset == null ? void 0 : (_this$props = _this.props).onReset.apply(_this$props, args);
+
+        _this.reset();
+      };
+
+      return _this;
+    }
+
+    ErrorBoundary.getDerivedStateFromError = function getDerivedStateFromError(error) {
+      return {
+        error: error
+      };
+    };
+
+    var _proto = ErrorBoundary.prototype;
+
+    _proto.reset = function reset() {
+      this.setState(initialState);
+    };
+
+    _proto.componentDidCatch = function componentDidCatch(error, info) {
+      var _this$props$onError, _this$props2;
+
+      (_this$props$onError = (_this$props2 = this.props).onError) == null ? void 0 : _this$props$onError.call(_this$props2, error, info);
+    };
+
+    _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+      var error = this.state.error;
+      var resetKeys = this.props.resetKeys; // There's an edge case where if the thing that triggered the error
+      // happens to *also* be in the resetKeys array, we'd end up resetting
+      // the error boundary immediately. This would likely trigger a second
+      // error to be thrown.
+      // So we make sure that we don't check the resetKeys on the first call
+      // of cDU after the error is set
+
+      if (error !== null && prevState.error !== null && changedArray(prevProps.resetKeys, resetKeys)) {
+        var _this$props$onResetKe, _this$props3;
+
+        (_this$props$onResetKe = (_this$props3 = this.props).onResetKeysChange) == null ? void 0 : _this$props$onResetKe.call(_this$props3, prevProps.resetKeys, resetKeys);
+        this.reset();
+      }
+    };
+
+    _proto.render = function render() {
+      var error = this.state.error;
+      var _this$props4 = this.props,
+          fallbackRender = _this$props4.fallbackRender,
+          FallbackComponent = _this$props4.FallbackComponent,
+          fallback = _this$props4.fallback;
+
+      if (error !== null) {
+        var _props = {
+          error: error,
+          resetErrorBoundary: this.resetErrorBoundary
+        };
+
+        if ( /*#__PURE__*/React__namespace.isValidElement(fallback)) {
+          return fallback;
+        } else if (typeof fallbackRender === 'function') {
+          return fallbackRender(_props);
+        } else if (FallbackComponent) {
+          return /*#__PURE__*/React__namespace.createElement(FallbackComponent, _props);
+        } else {
+          throw new Error('react-error-boundary requires either a fallback, fallbackRender, or FallbackComponent prop');
+        }
+      }
+
+      return this.props.children;
+    };
+
+    return ErrorBoundary;
+  }(React__namespace.Component);
+
+  function withErrorBoundary(Component, errorBoundaryProps) {
+    var Wrapped = function Wrapped(props) {
+      return /*#__PURE__*/React__namespace.createElement(ErrorBoundary, errorBoundaryProps, /*#__PURE__*/React__namespace.createElement(Component, props));
+    }; // Format for display in DevTools
+
+
+    var name = Component.displayName || Component.name || 'Unknown';
+    Wrapped.displayName = "withErrorBoundary(" + name + ")";
+    return Wrapped;
+  }
+
+  function useErrorHandler(givenError) {
+    var _React$useState = React__namespace.useState(null),
+        error = _React$useState[0],
+        setError = _React$useState[1];
+
+    if (givenError != null) throw givenError;
+    if (error != null) throw error;
+    return setError;
+  }
+  /*
+  eslint
+    @typescript-eslint/sort-type-union-intersection-members: "off",
+    @typescript-eslint/no-throw-literal: "off",
+    @typescript-eslint/prefer-nullish-coalescing: "off"
+  */
+
+  exports.ErrorBoundary = ErrorBoundary;
+  exports.useErrorHandler = useErrorHandler;
+  exports.withErrorBoundary = withErrorBoundary;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+}));
+//# sourceMappingURL=react-error-boundary.umd.js.map
 
 
 /***/ }),

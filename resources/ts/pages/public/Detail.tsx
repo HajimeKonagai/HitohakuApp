@@ -75,7 +75,6 @@ const PageDetail: React.VFC = () =>
 		]);
 
 	}
-	
 
 	const fullImageBox = React.createRef<HTMLDivElement>();
 	const fullImage = React.createRef<HTMLImageElement>();

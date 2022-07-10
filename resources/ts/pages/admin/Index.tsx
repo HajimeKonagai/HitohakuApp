@@ -111,7 +111,7 @@ const AdminIndex: React.VFC = () =>
 
 	const plantDelete = (number: string) =>
 	{
-		if (window.confirm('「'+ number + "」を削除してもよろしいでしょうか？\nこの操作は取り消せません。\n写真がある場合は写真も削除されます。"))
+		if (window.confirm('「'+ number + "」を削除してもよろしいでしょうか？\nこの操作は取り消せません。\n画像ファイルがある場合はがファイルも削除されます。"))
 		{
 			destroy.mutate({
 				number: number,

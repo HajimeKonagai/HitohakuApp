@@ -173,7 +173,7 @@ const AdminEdit: React.VFC = () =>
 							{editData[key] && (<span className="edit">edit</span>)}
 						</dd>
 					</>))}
-					<dt>現在の写真</dt>
+					<dt>現在の画像</dt>
 					<dd>
 						<img
 							src={`/photo/full/${data['number']}/?${new Date().getTime()}`}
@@ -189,7 +189,7 @@ const AdminEdit: React.VFC = () =>
 							)
 						)}
 					</dd>
-					<dt>写真の入れ替え</dt>
+					<dt>画像の入れ替え</dt>
 					<dd>
 						{!file &&
 							<ImageReader

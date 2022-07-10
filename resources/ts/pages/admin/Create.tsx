@@ -138,7 +138,7 @@ const AdminCreate: React.VFC = () =>
 					</dd>
 				</>))}
 				<dt>
-					写真
+					画像
 				</dt>
 				<dd>
 					<ImageReader

@@ -37,7 +37,7 @@ const AdminUpload: React.VFC = () =>
 	// setting
 	// const [ settings, setSettings ] = useState([]);
 	const [ settingName, setSettingName ] = useState('')
-	const [ rotateHorizontal, setRotateHorizontal ] = useState(false);
+	const [ rotateHorizontal, setRotateHorizontal ] = useState(true);
 	const [ overwrite, setOverwrite ] = useState(false);
 	const [ reportNotExistDb, setReportNotExistDb ] = useState(false);
 
@@ -202,7 +202,7 @@ const AdminUpload: React.VFC = () =>
 
 		if (live) params.append('live', '1');
 		if (rotateHorizontal) params.append('rotateHorizontal', '1');
-		if (live && overwrite) params.append('overwrite', '1');
+		if (overwrite) params.append('overwrite', '1');
 		if (reportNotExistDb) params.append('reportNotExistDb', '1');
 
 
@@ -221,7 +221,7 @@ const AdminUpload: React.VFC = () =>
 		setImportResult([]);
 	}
 
-	const title = '写真アップロード';
+	const title = '画像アップロード';
 
 	return (<Layout title={title}>
 		<>
@@ -289,15 +289,16 @@ const AdminUpload: React.VFC = () =>
 
 		<div>
 			<h2>画像ファイル</h2>
-
+			<p>ファイル名は、資料番号に一致させてください。<br />もしくは、「ファイル名」の入力欄で資料番号を入力してください。</p>
 			<table className="widefat fixed striped">
 			<tbody>
 				<tr>
 					<th>ファイル読み込み</th>
 					<td>
-					{files.length < 1 && (<ImageReader
+					<ImageReader
 						imageRead={imageRead}
-					/>) || (!live &&
+					/>
+					{files.length > 1 && !live && (
 						<button onClick={clearAll}>ファイルをクリア</button>
 					)}
 					</td>

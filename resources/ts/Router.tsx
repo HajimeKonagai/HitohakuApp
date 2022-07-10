@@ -53,7 +53,10 @@ const Router: React.VFC = () =>
 		<>
 			<header>
 				<BackButton />
-				<h1>ひとはくデータベース</h1>
+				<h1>
+					ひとはくデータベース
+					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.0.1</small>
+				</h1>
 				{authUser && (
 					<nav className="admin">
 						<ul>
@@ -61,7 +64,7 @@ const Router: React.VFC = () =>
 							<li><Link to="/admin/create">新規データ追加</Link></li>
 							<li><Link to="/admin/import">CSVインポート</Link></li>
 							<li><Link to="/admin/export">CSVエクスポート</Link></li>
-							<li><Link to="/admin/upload">写真アップロード</Link></li>
+							<li><Link to="/admin/upload">画像アップロード</Link></li>
 							<li><Link to="/admin/report">データチェックレポート</Link></li>
 
 							<li>
@@ -120,6 +123,7 @@ const Router: React.VFC = () =>
 						prev: location.pathname,
 					}}
 				>自由検索</Link>
+
 			</footer>
 		</>
 	);

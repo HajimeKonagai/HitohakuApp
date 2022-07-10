@@ -40,7 +40,9 @@ const AdminImport: React.VFC = () =>
 	const settingKey = 'csv';
 	const setting_query = useLoadSetting(settingKey);
 	const settings = !setting_query.isLoading && is_json(setting_query.data.value) ? JSON.parse(setting_query.data.value):[];
-const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* setSettingName('') */ return; });
+	const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* setSettingName('') */ return; });
+
+	const [ showSetting, setShowSetting ] = useState(false);
 
 	const [ settingName, setSettingName ] = useState('');
 
@@ -349,6 +351,9 @@ const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* se
 		<div className='import'>
 
 		<h2>設定</h2>
+		<p>
+			<label><input type="checkbox" checked={showSetting} onChange={(e) => setShowSetting(!showSetting) }/>設定項目の表示</label>
+		</p>
 		<table className="widefat fixed striped">
 			<tbody>
 				<tr>
@@ -378,7 +383,7 @@ const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* se
 				</tr>
 
 
-
+				{showSetting && <>
 				<tr>
 					<th>Encoding</th>
 					<td>
@@ -430,7 +435,7 @@ const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* se
 						</label><br />
 						<label>
 							<input type="checkbox" checked={importSetting.reportNotExistMedia} onChange={ () => changeImportSetting('reportNotExistMedia') } />
-							写真のファイルがない場合にレポートする。
+							画像のファイルがない場合にレポートする。
 						</label>
 					</td>
 				</tr>
@@ -446,9 +451,11 @@ const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* se
 					</td>
 				</tr>
 
+				</>}
 			</tbody>
 		</table>
 
+		{showSetting && <>
 		<SearchField
 			field={searchField}
 			setField={setSearchField}
@@ -463,6 +470,7 @@ const saveSetting = useSaveSetting(settingKey, (success) => { if (success) /* se
 			postTypeFields={dbFields}
 			fromFields={fromFields}
 		/>
+		</>}
 
 
 		<div>
