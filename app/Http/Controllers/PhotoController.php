@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Plant;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
-
+use \InterventionImage;
 
 class PhotoController extends Controller
 {
@@ -63,11 +63,25 @@ class PhotoController extends Controller
 			return \App::abort(404);
 		}
 
+		// 横長だったら縦に直して保存しておく
+		$converted = InterventionImage::make($path);
+		$converted->orientate(); // 勝手に回転させない
+		$w = $converted->width();
+		$h = $converted->height();
+		if ($h < $w) // 横長の時は回転させる
+		{
+			$converted->rotate(-90);
+			$converted->save($path);
+		}
+
+
 		$mime = mime_content_type($path);
 		header("Content-type: $mime name=$file_name");
 		header("Content-Disposition: attachment; filename=$file_name");
 		header("Content-Length: ".@filesize($path));
 		header("Expires: 0");
+
+
 		@readfile($path);
 		exit;
 	}

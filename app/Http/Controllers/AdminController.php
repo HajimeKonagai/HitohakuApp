@@ -745,7 +745,19 @@ class AdminController extends Controller
 
 			if ($live)
 			{
+
 				$file->storeAs(str_replace(Storage::disk('local')->path(''), '', $full_dir), $filename, 'local'); // rename で良い？
+
+				// 保存する時に w h を見る
+				$converted = InterventionImage::make($path);
+				$converted->orientate(); // 勝手に回転させない
+				$w = $converted->width();
+				$h = $converted->height();
+				if ($h < $w) // 横長の時は回転させる
+				{
+					$converted->rotate(-90);
+					$converted->save($path);
+				}
 			}
 		}
 		else
