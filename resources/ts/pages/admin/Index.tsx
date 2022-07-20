@@ -211,6 +211,7 @@ const AdminIndex: React.VFC = () =>
 							</span>
 						</th>
 					))}
+						<th>画像</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -227,6 +228,14 @@ const AdminIndex: React.VFC = () =>
 								}
 							</td>
 						))}
+						<td>
+
+							<img
+								src={`/photo/full/${item['number']}/?${new Date().getTime()}`}
+								style={{maxHeight: '100px', display: 'block'}}
+							/>
+
+						</td>
 						<td>
 							<Link to={`/admin/edit/${item.number}`} className="link-button small">編集</Link>
 							<button onClick={() => plantDelete(item.number)} className="link-button small delete">削除</button>

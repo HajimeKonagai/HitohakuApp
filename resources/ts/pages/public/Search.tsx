@@ -9,6 +9,17 @@ import Layout from './Layout';
 
 const PageSearch: React.VFC = () =>
 {
+
+	const columns = {
+		'number': '資料番号',
+		'jp_name': '種名（和名）',
+		/*
+		'jp_family_name': '科名（和名）',
+		'en_name': '学名',
+		'en_family_name': '科名（欧名）',
+		*/
+	};
+
 	const location = useLocation();
 
 	const [ text, setText ] = useState('');
@@ -20,7 +31,10 @@ const PageSearch: React.VFC = () =>
 
 	const [ page, setPage ] = useState(1);
 	const { width, height } = useWindowDimensions();
-	const perPage = width < height ? 15: 8;
+
+	const [ showThumbnail, setShowThumbnail ] = useState(false);
+
+	const perPage = width < height ? 16: 8;
 
 	const [ searchValues, setSearchValues ] = useState<SearchParam>({
 		text: text,
@@ -100,48 +114,97 @@ const PageSearch: React.VFC = () =>
 				page={page}
 				setPage={setPage}
 			/>
-			<table className="search alternate">
-			<thead>
-				<tr>
-					<th className="link"></th>
-					{(true || all || number) && <th>資料番号</th>}
-					<th>種名(和名)</th>
-					<th>学名</th>
-					<th>科名(和名)</th>
-					<th>科名(欧名)</th>
-				</tr>
-			</thead>
-			<tbody>
-			{Object.keys(data.data).map((key) => (
-				<tr key={`${data.data[key]['number']}`}>
-					{(true || all || number) && (
-						<Link
-							className="link-button small"
-							to={`/detail/${data.data[key]['number']}`}
-							state={{
-								prev: location.pathname,
-							}}
-						>
-							詳細
-						</Link>
-					) || (
-						<td>
-							<Link
-								to={`/list/?en_name=${data.data[key]['en_name']}&jp_name=${data.data[key]['jp_name']}&en_family_name=${data.data[key]['en_family_name']}&jp_family_name=${data.data[key]['jp_family_name']}`}
-							>
-								見る
-							</Link>
-						</td>
-					)}
-					{(true || all || number) && <th><div className="td-inner">{data.data[key]['number']}</div></th>}
-					<td><div className="td-inner">{data.data[key]['jp_name']}</div></td>
-					<td><div className="td-inner">{data.data[key]['en_name']}</div></td>
-					<td><div className="td-inner">{data.data[key]['jp_family_name']}</div></td>
-					<td><div className="td-inner">{data.data[key]['en_family_name']}</div></td>
-				</tr>
-			))}
-			</tbody>
-			</table>
+			<div>
+				<button
+					onClick={ () => setShowThumbnail(!showThumbnail)}
+					className={'link-button small ' + (showThumbnail ? '': 'disable')}>
+					写真を表示{showThumbnail? 'ON': 'OFF'}
+				</button>
+			</div>
+
+			{showThumbnail && (
+				<ul className="search-thumbnail-detail">
+				{Object.keys(data.data).map((key) => {
+					console.log(data.data[key])
+					return (<li>
+						<img
+							src={`/photo/small/${data.data[key]['number']}`}
+						/>
+						<table>
+							<tbody>
+							{Object.keys(columns).map((column_key) => (
+								data.data[key][column_key] && (
+									<tr>
+										<th>{columns[column_key]}</th>
+										<td>{data.data[key][column_key]}</td>
+									</tr>
+								) || (<></>)
+							))}
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colSpan={2}>
+										<Link
+											to={`/detail/${data.data[key]['number']}`}
+											className="link-button small"
+											state={{
+												prev: location.pathname,
+											}}
+										>
+											見る
+										</Link>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</li>)
+})}
+				</ul>
+			) || (
+				<table className="search alternate">
+					<thead>
+						<tr>
+							<th className="link"></th>
+							{(true || all || number) && <th>資料番号</th>}
+							<th>種名(和名)</th>
+							<th>学名</th>
+							<th>科名(和名)</th>
+							<th>科名(欧名)</th>
+						</tr>
+					</thead>
+					<tbody>
+					{Object.keys(data.data).map((key) => (
+						<tr key={`${data.data[key]['number']}`}>
+							{(true || all || number) && (
+								<Link
+									className="link-button small"
+									to={`/detail/${data.data[key]['number']}`}
+									state={{
+										prev: location.pathname,
+									}}
+								>
+									詳細
+								</Link>
+							) || (
+								<td>
+									<Link
+										to={`/list/?en_name=${data.data[key]['en_name']}&jp_name=${data.data[key]['jp_name']}&en_family_name=${data.data[key]['en_family_name']}&jp_family_name=${data.data[key]['jp_family_name']}`}
+									>
+										見る
+									</Link>
+								</td>
+							)}
+							{(true || all || number) && <th><div className="td-inner">{data.data[key]['number']}</div></th>}
+							<td><div className="td-inner">{data.data[key]['jp_name']}</div></td>
+							<td><div className="td-inner">{data.data[key]['en_name']}</div></td>
+							<td><div className="td-inner">{data.data[key]['jp_family_name']}</div></td>
+							<td><div className="td-inner">{data.data[key]['en_family_name']}</div></td>
+						</tr>
+					))}
+					</tbody>
+				</table>
+			)}
+
 		</>)}
 	</Layout>);
 }

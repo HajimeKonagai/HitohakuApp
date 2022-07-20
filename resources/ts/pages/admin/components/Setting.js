@@ -260,7 +260,7 @@ class Setting
 				},
 				{
 					"to": "collect_addr",
-					"from": "10",
+					"from": "11",
 					"replace": [],
 					"taxonomy_search": "name",
 					"post_type_search": "slug",
@@ -434,7 +434,7 @@ class Setting
 				},
 				{
 					"to": "collect_addr",
-					"from": "10",
+					"from": "11",
 					"replace": [],
 					"taxonomy_search": "name",
 					"post_type_search": "slug",

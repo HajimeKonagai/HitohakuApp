@@ -55,7 +55,7 @@ const Router: React.VFC = () =>
 				<BackButton />
 				<h1>
 					ひとはくデータベース
-					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.0.2</small>
+					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.0.3</small>
 				</h1>
 				{authUser && (
 					<nav className="admin">
