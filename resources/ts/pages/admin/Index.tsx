@@ -231,7 +231,7 @@ const AdminIndex: React.VFC = () =>
 						<td>
 
 							<img
-								src={`/photo/full/${item['number']}/?${new Date().getTime()}`}
+								src={`/photo/small/${item['number']}/?${new Date().getTime()}`}
 								style={{maxHeight: '100px', display: 'block'}}
 							/>
 

@@ -2258,7 +2258,7 @@ var Router = function Router() {
       fontSize: '0.7rem',
       marginLeft: '1rem'
     }
-  }, "v 1.0.3")), authUser && react_1["default"].createElement("nav", {
+  }, "v 1.0.4")), authUser && react_1["default"].createElement("nav", {
     className: "admin"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin"
@@ -5645,7 +5645,7 @@ var AdminIndex = function AdminIndex() {
     }, Object.keys(columns).map(function (key) {
       return react_1["default"].createElement("td", null, key == 'is_private' ? item[key] ? '非公開' : '' : item[key] ? item[key] : '');
     }), react_1["default"].createElement("td", null, react_1["default"].createElement("img", {
-      src: "/photo/full/" + item['number'] + "/?" + new Date().getTime(),
+      src: "/photo/small/" + item['number'] + "/?" + new Date().getTime(),
       style: {
         maxHeight: '100px',
         display: 'block'
