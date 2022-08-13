@@ -55,7 +55,7 @@ const PageGroup: React.VFC = ( {} ) =>
 				<tr key={`${data.data[key]['en_name']}-${data.data[key]['jp_name']}`}>
 					<td className="link">
 						<LinkButton
-							to={`/list/${data.data[key]['jp_name']}/${data.data[key]['jp_family_name']}/${data.data[key]['en_name']}/${data.data[key]['en_family_name']}`}
+							to={`/list/${data.data[key]['jp_name'] ? data.data[key]['jp_name']: '他'}/${data.data[key]['jp_family_name'] ? data.data[key]['jp_family_name']: '他'}/${data.data[key]['en_name'] ? data.data[key]['en_name']: '他'}/${data.data[key]['en_family_name'] ? data.data[key]['en_family_name']: '他'}`}
 						>
 							見る
 						</LinkButton>

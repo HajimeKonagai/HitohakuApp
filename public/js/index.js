@@ -2258,7 +2258,7 @@ var Router = function Router() {
       fontSize: '0.7rem',
       marginLeft: '1rem'
     }
-  }, "v 1.0.4")), authUser && react_1["default"].createElement("nav", {
+  }, "v 1.0.5")), authUser && react_1["default"].createElement("nav", {
     className: "admin"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin"
@@ -7708,7 +7708,7 @@ var PageDetail = function PageDetail() {
       return setZoom(!zoom);
     },
     className: 'link-button ' + (zoom ? '' : 'disable')
-  }, "\u62E1\u5927\u8868\u793A", zoom ? 'ON' : 'OFF'), react_1["default"].createElement("div", {
+  }, "\u62E1\u5927\u8868\u793A", zoom ? 'OFF' : 'ON'), react_1["default"].createElement("div", {
     className: "image"
   }, react_1["default"].createElement("img", {
     src: "/photo/large/" + data['number'],
@@ -7860,8 +7860,8 @@ var PageFamily = function PageFamily() {
     return react_1["default"].createElement("li", {
       key: data.data[key]['name']
     }, react_1["default"].createElement(LinkButton_1.LinkButton, {
-      to: "/group/" + field + "/" + data.data[key]['name']
-    }, data.data[key]['name']), react_1["default"].createElement("span", {
+      to: "/group/" + field + "/" + (data.data[key]['name'] ? data.data[key]['name'] : '他')
+    }, data.data[key]['name'] ? data.data[key]['name'] : '他'), react_1["default"].createElement("span", {
       className: "count"
     }, "(", data.data[key]['count'], ")"));
   }))));
@@ -7996,7 +7996,7 @@ var PageGroup = function PageGroup(_a) {
     }, react_1["default"].createElement("td", {
       className: "link"
     }, react_1["default"].createElement(LinkButton_1.LinkButton, {
-      to: "/list/" + data.data[key]['jp_name'] + "/" + data.data[key]['jp_family_name'] + "/" + data.data[key]['en_name'] + "/" + data.data[key]['en_family_name']
+      to: "/list/" + (data.data[key]['jp_name'] ? data.data[key]['jp_name'] : '他') + "/" + (data.data[key]['jp_family_name'] ? data.data[key]['jp_family_name'] : '他') + "/" + (data.data[key]['en_name'] ? data.data[key]['en_name'] : '他') + "/" + (data.data[key]['en_family_name'] ? data.data[key]['en_family_name'] : '他')
     }, "\u898B\u308B")), react_1["default"].createElement("td", null, react_1["default"].createElement("div", {
       className: "td-inner"
     }, data.data[key]['jp_name'])), react_1["default"].createElement("td", null, react_1["default"].createElement("div", {

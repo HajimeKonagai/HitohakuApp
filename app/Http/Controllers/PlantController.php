@@ -24,20 +24,39 @@ class PlantController extends Controller
 			'jp_name',
 		];
 
+		if (strpos($field, 'family'))
+		{
+			$allow_fields = [
+				$field,
+			];
+		}
+
+
 		if (! in_array($field, $allow_fields)) return \App::abort(404);
 
 		$initial_field = $field.'_initial';
+		array_push($allow_fields, $initial_field);
 
 		$subquery = Plant::public()
-			->select($field, $initial_field)
-			->groupBy($field, $initial_field)
-			->getQuery();
+			->select(DB::raw(implode(',', $allow_fields)))
+			->groupBy($allow_fields)
+			->orderBy($field)->getQuery();
+
 
 		$plants = Plant::query()
 			->select(DB::raw($initial_field.', COUNT('.$field.') as count'))
 			->from($subquery, 'plant_group')
-			->groupBy($initial_field)
+			->groupBy($allow_fields)
 			->get();
+
+		Log::debug(
+			Plant::query()
+			->select(DB::raw($initial_field.', COUNT('.$field.') as count'))
+			->from($subquery, 'plant_group')
+			->groupBy($initial_field)
+			->toSql()
+
+		);
 
 		if (substr($field, 0, 2) == 'en')
 		{
@@ -58,7 +77,7 @@ class PlantController extends Controller
 
 				if (substr($field, 0, 2) == 'en')
 				{
-					$atoz['other'] += $plant->count;
+					$atoz['他'] += $plant->count;
 				}
 				else
 				{
@@ -83,7 +102,7 @@ class PlantController extends Controller
 			$str = mb_substr(static::$en_strs, $i, 1);
 			$atoz[$str] = 0;
 		}
-		$atoz['other'] = 0;
+		$atoz['他'] = 0;
 
 		return $atoz;
 
@@ -115,7 +134,7 @@ class PlantController extends Controller
 		$initial_field = $field.'_initial';
 
 
-		if (mb_strlen($initial) != 1)
+		if (mb_strlen($initial) != 1 || $initial == '他')
 		{
 			$initial = '';
 		}
@@ -153,16 +172,31 @@ class PlantController extends Controller
 		{
 			$initial_field = $field;
 			$field = str_replace('_family', '', $field);
+
+			if (mb_strlen($initial) != 1 || $initial == '他')
+			{
+				$initial = '';
+			}
 		}
 		else
 		{
 			$initial_field = $field.'_initial';
 
-			if (mb_strlen($initial) != 1)
+			if (mb_strlen($initial) != 1 || $initial == '他')
 			{
 				$initial = '';
 			}
 		}
+		Log::debug('sql');
+		Log::debug(
+
+			Plant::public()
+			->select(DB::raw(implode(',', $allow_fields).', COUNT(number) as count'))
+			->where($initial_field, $initial)
+			->groupBy($allow_fields)
+			->orderBy($field)->toSql()
+
+		);
 
 		return Plant::public()
 			->select(DB::raw(implode(',', $allow_fields).', COUNT(number) as count'))
@@ -193,6 +227,7 @@ class PlantController extends Controller
 		foreach ($allow_fields as $field)
 		{
 			$value = $request->{$field} ? $request->{$field} : '';
+			if ($value == '他') $value = '';
 			$query->where($field, $value);
 		}
 

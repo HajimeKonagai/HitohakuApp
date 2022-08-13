@@ -35,8 +35,8 @@ const PageFamily: React.VFC = () =>
 			<ul className="family">
 			{Object.keys(data.data).map((key) => (
 				<li key={data.data[key]['name']}>
-					<LinkButton to={`/group/${field}/${data.data[key]['name']}`}>
-						{data.data[key]['name']}
+					<LinkButton to={`/group/${field}/${data.data[key]['name'] ? data.data[key]['name']: '他'}`}>
+						{data.data[key]['name'] ? data.data[key]['name']: '他'}
 					</LinkButton>
 					<span className="count">({data.data[key]['count']})</span>
 				</li>

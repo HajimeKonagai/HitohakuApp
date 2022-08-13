@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div id="app">No rendered.</div>
-		<script src="{{ mix('js/index.js') }}?ver=20220724"></script>
+		<script src="{{ mix('js/index.js') }}?ver=20220729"></script>
 
 
 		<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

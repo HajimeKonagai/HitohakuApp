@@ -88,7 +88,7 @@ const PageDetail: React.VFC = () =>
 			<button
 				onClick={ () => setZoom(!zoom)}
 				className={'link-button ' + (zoom ? '': 'disable')}>
-				拡大表示{zoom? 'ON': 'OFF'}
+				拡大表示{zoom? 'OFF': 'ON'}
 			</button>
 			<div className="image">
 				<img
