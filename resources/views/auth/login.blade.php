@@ -4,13 +4,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>ひとはくデータベース</title>
+		<title>ひとはく植物標本画像データベース</title>
 		<link href="{{ mix('css/app.css') }}?ver=20220425" rel="stylesheet">
 	</head>
 	<body>
 		<div id="app">
 			<header>
-				<h1>ひとはくデータベース</h1>
+				<h1>ひとはく植物標本画像データベース</h1>
 			</header>
 
 			<main>

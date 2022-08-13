@@ -2253,12 +2253,12 @@ var Router = function Router() {
     document.getElementById('logout-form').submit();
   };
 
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("header", null, react_1["default"].createElement(BackButton_1["default"], null), react_1["default"].createElement("h1", null, "\u3072\u3068\u306F\u304F\u30C7\u30FC\u30BF\u30D9\u30FC\u30B9", react_1["default"].createElement("small", {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("header", null, react_1["default"].createElement(BackButton_1["default"], null), react_1["default"].createElement("h1", null, "\u3072\u3068\u306F\u304F\u690D\u7269\u6A19\u672C\u753B\u50CF\u30C7\u30FC\u30BF\u30D9\u30FC\u30B9", react_1["default"].createElement("small", {
     style: {
       fontSize: '0.7rem',
       marginLeft: '1rem'
     }
-  }, "v 1.0.5")), authUser && react_1["default"].createElement("nav", {
+  }, "v 1.0.6")), authUser && react_1["default"].createElement("nav", {
     className: "admin"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin"
