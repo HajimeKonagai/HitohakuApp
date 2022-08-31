@@ -171,9 +171,9 @@ class PlantController extends Controller
 		if (strpos($field, 'family'))
 		{
 			$initial_field = $field;
-			$field = str_replace('_family', '', $field);
+			// $field = str_replace('_family', '', $field);
 
-			if (mb_strlen($initial) != 1 || $initial == '他')
+			if ($initial == '他')
 			{
 				$initial = '';
 			}
@@ -190,7 +190,7 @@ class PlantController extends Controller
 		Log::debug('sql');
 		Log::debug(
 
-			Plant::public()
+		Plant::public()
 			->select(DB::raw(implode(',', $allow_fields).', COUNT(number) as count'))
 			->where($initial_field, $initial)
 			->groupBy($allow_fields)

@@ -2258,7 +2258,7 @@ var Router = function Router() {
       fontSize: '0.7rem',
       marginLeft: '1rem'
     }
-  }, "v 1.0.6")), authUser && react_1["default"].createElement("nav", {
+  }, "v 1.0.7")), authUser && react_1["default"].createElement("nav", {
     className: "admin"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin"
@@ -7707,7 +7707,7 @@ var PageDetail = function PageDetail() {
     onClick: function onClick() {
       return setZoom(!zoom);
     },
-    className: 'link-button ' + (zoom ? '' : 'disable')
+    className: 'link-button ' + (zoom ? '' : '')
   }, "\u62E1\u5927\u8868\u793A", zoom ? 'OFF' : 'ON'), react_1["default"].createElement("div", {
     className: "image"
   }, react_1["default"].createElement("img", {
