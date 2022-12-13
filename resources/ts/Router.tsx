@@ -49,13 +49,24 @@ const Router: React.VFC = () =>
 	}
 		
 
+
+	if (
+		!isLoading &&
+		!authUser &&
+		location.pathname.startsWith('/admin')
+	)
+	{
+		window.location.replace('/login');
+	}
+
+
 	return (
 		<>
 			<header>
 				<BackButton />
 				<h1>
 					ひとはく植物標本画像データベース
-					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.0.7</small>
+					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.0.8</small>
 				</h1>
 				{authUser && (
 					<nav className="admin">
@@ -105,7 +116,7 @@ const Router: React.VFC = () =>
 					</>
 				) || (
 					<>
-					<Route path="admin/*" element={<Navigate to="/login" />} />
+					<Route path="admin/*" element={<Navigate to="/login"  replace={true} />} />
 					</>
 				)}
 				</Routes>

@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -38,4 +39,17 @@ class Handler extends ExceptionHandler
 			//
 		});
 	}
+
+
+	public function render($request, Throwable $exception)
+	{
+		// Tokenエラーの時、ログイン画面にリダイレクトする。
+		if ($exception instanceof TokenMismatchException)
+		{
+			return redirect(route('login'));
+		}
+
+		return parent::render($request, $exception);
+	}
+
 }
