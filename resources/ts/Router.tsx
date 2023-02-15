@@ -66,7 +66,7 @@ const Router: React.VFC = () =>
 				<BackButton />
 				<h1>
 					ひとはく植物標本画像データベース
-					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.0.9</small>
+					<small style={{fontSize: '0.7rem', marginLeft: '1rem'}}>v 1.1.0</small>
 				</h1>
 				{authUser && (
 					<nav className="admin">

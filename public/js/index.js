@@ -5706,7 +5706,7 @@ var Router = function Router() {
       fontSize: '0.7rem',
       marginLeft: '1rem'
     }
-  }, "v 1.0.9")), authUser && react_1["default"].createElement("nav", {
+  }, "v 1.1.0")), authUser && react_1["default"].createElement("nav", {
     className: "admin"
   }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
     to: "/admin"
